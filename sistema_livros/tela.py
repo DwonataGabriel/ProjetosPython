@@ -62,13 +62,14 @@ def new_user():
         email = entrada_endereco_email.get()
         tel = entrada_tel.get()
 
-        lista = [first_name, last_name, address, email, tel]
+        list = [first_name, last_name, address, email, tel]
       
         
-        for i in lista :
+        for i in list :
             if i =='':
                 messagebox.showerror('Erro', 'Preencha todos campos')    
                 return 
+
         insert_users(first_name, last_name, address, email, tel)
         messagebox.showinfo('Sucesso', 'Usuário inserido com sucesso')
 
@@ -77,6 +78,7 @@ def new_user():
         entrada_endereco.delete(0,END)
         entrada_endereco_email.delete(0,END)
         entrada_tel.delete(0,END)
+
     app_ = Label(frame_direita, text="Inserir um Novo Usuário", width=50, compound=LEFT, padx=5, pady=10, font=('Verdana 12'), bg=b11, fg=b3 )
     app_.grid(row=0, column=0, columnspan=4, sticky=NSEW)
 
@@ -121,16 +123,66 @@ def new_user():
     btn_save.grid(row=7, column=1, sticky=NSEW, padx=5, pady=6  )
 
 def new_libre():
+    global img_salvar
+    def add():
+
+        name_libre = ent_name_libre.get()
+        autor = ent_name_autor.get()
+        editora = ent_name_edit.get()
+        isbn = ent_isbn.get()
+        data_pub = ent_pub.get()
+
+        list = [name_libre, autor, editora, isbn, data_pub]
+
+        for i in list:
+            if i == '':
+                messagebox.showerror('Erro', 'Preencha Todos os campos')
+                return
+
+        insert_book(name_libre, autor, editora, isbn, data_pub)
+        messagebox.showinfo('Sucesso', 'Livro inserido com sucesso')
+
+
+        ent_name_libre.delete(0,END)
+        ent_name_autor.delete(0, END)
+        ent_name_edit.delete(0,END)
+        ent_isbn.delete(0,END)
+        ent_pub.delete(0,END)
+
     app_ = Label(frame_direita, text="Inserir um Novo Livro", width=50, compound=LEFT, padx=5, pady=10, font=('Verdana 12'), bg=b11, fg=b3 )
     app_.grid(row=0, column=0, columnspan=4, sticky=NSEW)
     
     lab_name_libre = Label(frame_direita, text="Nome do Livro", anchor=NW, font=('Ivy 10'), bg=b4, fg=b11)
     lab_name_libre.grid(row=2, column=0, padx=5, pady=10, sticky=NSEW)
-
     ent_name_libre = Entry(frame_direita, width=25, justify="left", relief="solid")
     ent_name_libre.grid(row=2, column=1, padx=5, pady=10, sticky=NSEW)
-
     
+    lab_name_autor = Label(frame_direita, text="Autor", anchor=NW, font=('Ivy 10'), bg=b4, fg=b11)
+    lab_name_autor.grid(row=3, column=0, padx=5, pady=10, sticky=NSEW)
+    ent_name_autor = Entry(frame_direita, width=25, justify="left", relief="solid")
+    ent_name_autor.grid(row=3, column=1, padx=5, pady=10, sticky=NSEW)
+
+    lab_name_edit = Label(frame_direita, text="Editora", anchor=NW, font=('Ivy 10'), bg=b4, fg=b11)
+    lab_name_edit.grid(row=4, column=0, padx=5, pady=10, sticky=NSEW)
+    ent_name_edit = Entry(frame_direita, width=25, justify="left", relief="solid")
+    ent_name_edit.grid(row=4, column=1, padx=5, pady=10, sticky=NSEW)
+    
+    lab_pub = Label(frame_direita, text="Ano Publicação", anchor=NW, font=('Ivy 10'), bg=b4, fg=b11)
+    lab_pub .grid(row=5, column=0, padx=5, pady=10, sticky=NSEW)
+    ent_pub = Entry(frame_direita, width=25, justify="left", relief="solid")
+    ent_pub.grid(row=5, column=1, padx=5, pady=10, sticky=NSEW)
+
+    lab_isbn = Label(frame_direita, text="ISBN", anchor=NW, font=('Ivy 10'), bg=b4, fg=b11)
+    lab_isbn.grid(row=6, column=0, padx=5, pady=10, sticky=NSEW)
+    ent_isbn = Entry(frame_direita, width=25, justify="left", relief="solid")
+    ent_isbn.grid(row=6, column=1, padx=5, pady=10, sticky=NSEW)
+
+    img_salvar = Image.open('sistema_livros/icons/img_salvar.png')
+    img_salvar = img_salvar.resize((30,30))
+    img_salvar = ImageTk.PhotoImage(img_salvar)
+
+    btn_save = Button(frame_direita,command=add, image=img_salvar, compound=LEFT, anchor=NW, text="Salvar", bg=b11, fg=b2, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+    btn_save.grid(row=7, column=1, sticky=NSEW, padx=5, pady=6  )
 #def para menu  
  
 
@@ -144,6 +196,11 @@ def control(i):
         for widget in frame_direita.winfo_children():
             widget.destroy()
         new_libre()
+
+    if i == '':
+        for widget in frame_direita.winfo_children():
+            widget.destroy()
+        
 
 
 
@@ -211,5 +268,6 @@ img_show_emp = ImageTk.PhotoImage(img_show_emp)
 
 show_libres_emp  =  Button(frame_left, image=img_show_emp, compound=LEFT, anchor=NW, text="Exibir Livros emprestados", bg=b11, fg=b2, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
 show_libres_emp.grid(row=6 ,column=0, padx=5, pady=6)
+
 janela.mainloop()
 
