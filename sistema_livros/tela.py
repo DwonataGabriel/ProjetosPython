@@ -36,7 +36,7 @@ frame_direita.grid(row = 1, column= 1, columnspan=2, sticky=NSEW)
 
 #abrindo a img 
 
-app_img = Image.open('livro/icons/Livro.png  ')
+app_img = Image.open('sistema_livros/icons/Livro.png  ')
 app_img = app_img.resize((40, 40 ))
 app_img= ImageTk.PhotoImage(app_img)
 
@@ -113,7 +113,7 @@ def new_user():
     entrada_tel = Entry(frame_direita, width=25, justify="left", relief="solid")
     entrada_tel.grid(row=6, column=1, padx=5, pady=10, sticky=NSEW)
 
-    img_salvar = Image.open('livro/icons/img_salvar.png')
+    img_salvar = Image.open('sistema_livros/icons/img_salvar.png')
     img_salvar = img_salvar.resize((30,30))
     img_salvar = ImageTk.PhotoImage(img_salvar)
 
@@ -150,7 +150,7 @@ def control(i):
 
 #menu interface--------------
 #add user---------
-user_img = Image.open('livro/icons/add.png')
+user_img = Image.open('sistema_livros/icons/add.png')
 user_img = user_img.resize((18,18  ))
 user_img = ImageTk.PhotoImage(user_img)
 add_usuario = Button(frame_left, command=lambda:control('novo_usuario'), image=user_img, compound=LEFT, anchor=NW, text="Novo Usuário", bg=b11, fg=b2, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
@@ -159,7 +159,7 @@ add_usuario.grid(row=0, column=0, sticky=NSEW, padx=5, pady=6
 #new libre
 
 
-img_libre = Image.open('livro/icons/add.png')
+img_libre = Image.open('sistema_livros/icons/add.png')
 img_libre = img_libre.resize((18,18))
 img_libre = ImageTk.PhotoImage(img_libre)
 
@@ -170,7 +170,7 @@ add_libre.grid(row=1, column=0, sticky=NSEW, padx=5, pady=6  )
 #show libres
 
 
-img_show_libres = Image.open('livro/icons/livro.png')
+img_show_libres = Image.open('sistema_livros/icons/livro.png')
 img_show_libres = img_show_libres.resize((18,18))
 img_show_libres= ImageTk.PhotoImage(img_show_libres)
 
@@ -179,7 +179,7 @@ show_libres.grid(row=2, column=0, sticky=NSEW, padx=5, pady=6 )
 
 #show users
 
-img_show_users = Image.open('livro/icons/user.png')
+img_show_users = Image.open('sistema_livros/icons/user.png')
 img_show_users = img_show_users.resize((18,18))
 img_show_users = ImageTk.PhotoImage(img_show_users)
 
@@ -187,7 +187,7 @@ show_users = Button(frame_left, image=img_show_users, compound=LEFT, anchor=NW, 
 show_users.grid(row=3, column=0, sticky=NSEW, padx=5, pady=6 )
 
 #realizar emp
-img_emp_users = Image.open('livro/icons/add.png')
+img_emp_users = Image.open('sistema_livros/icons/add.png')
 img_emp_users = img_emp_users.resize((18,18))
 img_emp_users = ImageTk.PhotoImage(img_emp_users)
 
@@ -195,7 +195,7 @@ add_empp = Button(frame_left, image=img_emp_users, compound=LEFT, anchor=NW, tex
 add_empp .grid(row=4, column=0, sticky=NSEW, padx=5, pady=6 )
 
 #devolucao emp
-img_dev_emp = Image.open('livro/icons/return.png')
+img_dev_emp = Image.open('sistema_livros/icons/return.png')
 img_dev_emp = img_dev_emp.resize((18,18 ))
 img_dev_emp = ImageTk.PhotoImage(img_dev_emp)
 
@@ -204,7 +204,7 @@ add_devolution  =  Button(frame_left, image=img_dev_emp, compound=LEFT, anchor=N
 add_devolution.grid(row=5 ,column=0, padx=5, pady=6)
 
 
-img_show_emp = Image.open('livro/icons/livro.png')
+img_show_emp = Image.open('sistema_livros/icons/livro.png')
 img_show_emp = img_show_emp.resize((18,18 ))
 img_show_emp = ImageTk.PhotoImage(img_show_emp)
 
