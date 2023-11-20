@@ -1,11 +1,14 @@
 from tkinter import*
 from PIL import Image, ImageTk
+from view import*       
+from tkinter import messagebox
 
-b1 = "#00000"
+b1 = "#00000" 
 b11 = "#1C1C1C"
 b2 = "#A9A9A9"
 b3 = "#C0C0C0"
-m1 = "#FF8C00"
+b4 = "#DCDCDC" #label names
+m1 = "#FF8C00" #menu
 
 
 janela = Tk()
@@ -48,17 +51,99 @@ app_line =Label(frame_cima, width=770, height=1, padx=5,anchor=NW, font=('Verdan
 app_line.place(x=0, y=47)
 
 
+
 def new_user():
+
     global img_salvar
+    def add():
+        first_name = ent_nome.get()
+        last_name = ent_sobrenome.get()
+        address = entrada_endereco.get()
+        email = entrada_endereco_email.get()
+        tel = entrada_tel.get()
+
+        lista = [first_name, last_name, address, email, tel]
+      
+        
+        for i in lista :
+            if i =='':
+                messagebox.showerror('Erro', 'Preencha todos campos')    
+                return 
+        insert_users(first_name, last_name, address, email, tel)
+        messagebox.showinfo('Sucesso', 'Usuário inserido com sucesso')
+
+        ent_nome.delete(0,END)
+        ent_sobrenome.delete(0,END)
+        entrada_endereco.delete(0,END)
+        entrada_endereco_email.delete(0,END)
+        entrada_tel.delete(0,END)
     app_ = Label(frame_direita, text="Inserir um Novo Usuário", width=50, compound=LEFT, padx=5, pady=10, font=('Verdana 12'), bg=b11, fg=b3 )
     app_.grid(row=0, column=0, columnspan=4, sticky=NSEW)
-#def para menu 
+
+    lab_nome = Label(frame_direita, text="Primeiro Nome", anchor=NW, font=('Ivy 10'), bg=b4, fg=b11)
+    lab_nome.grid(row=2, column=0, padx=5, pady=10, sticky=NSEW)
+
+    ent_nome = Entry(frame_direita, width=25, justify="left", relief="solid")
+    ent_nome.grid(row=2, column=1, padx=5, pady=10, sticky=NSEW)
+
+
+    lab_sobrenome = Label(frame_direita, text="Segundo Nome", anchor=NW, font=('Ivy 10'), bg=b4, fg=b11)
+    lab_sobrenome.grid(row=3, column=0, padx=5, pady=10, sticky=NSEW)
+    
+    ent_sobrenome = Entry(frame_direita, width=25, justify="left", relief="solid")
+    ent_sobrenome.grid(row=3, column=1, padx=5, pady=10, sticky=NSEW)
+
+
+    lab_endereco = Label(frame_direita, text="Endereço do Usuário", anchor=NW, font=('Ivy 10'), bg=b4, fg=b11)
+    lab_endereco.grid(row=4, column=0, padx=5, pady=10, sticky=NSEW)
+
+    entrada_endereco = Entry(frame_direita, width=25, justify="left", relief="solid")
+    entrada_endereco.grid(row=4, column=1, padx=5, pady=10, sticky=NSEW)
+
  
+    lab_endereco_email = Label(frame_direita, text="Endereço de Email", anchor=NW, font=('Ivy 10'), bg=b4, fg=b11)
+    lab_endereco_email.grid(row=5, column=0, padx=5, pady=10, sticky=NSEW)
+
+    entrada_endereco_email = Entry(frame_direita, width=25, justify="left", relief="solid")
+    entrada_endereco_email.grid(row=5, column=1, padx=5, pady=10, sticky=NSEW)
+     
+    lab_tel = Label(frame_direita, text="Número de Telefone", anchor=NW, font=('Ivy 10'), bg=b4, fg=b11)
+    lab_tel.grid(row=6, column=0, padx=5, pady=10, sticky=NSEW)
+
+    entrada_tel = Entry(frame_direita, width=25, justify="left", relief="solid")
+    entrada_tel.grid(row=6, column=1, padx=5, pady=10, sticky=NSEW)
+
+    img_salvar = Image.open('livro/icons/img_salvar.png')
+    img_salvar = img_salvar.resize((30,30))
+    img_salvar = ImageTk.PhotoImage(img_salvar)
+
+    btn_save = Button(frame_direita,command=add, image=img_salvar, compound=LEFT, anchor=NW, text="Salvar", bg=b11, fg=b2, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+    btn_save.grid(row=7, column=1, sticky=NSEW, padx=5, pady=6  )
+
+def new_libre():
+    app_ = Label(frame_direita, text="Inserir um Novo Livro", width=50, compound=LEFT, padx=5, pady=10, font=('Verdana 12'), bg=b11, fg=b3 )
+    app_.grid(row=0, column=0, columnspan=4, sticky=NSEW)
+    
+    lab_name_libre = Label(frame_direita, text="Nome do Livro", anchor=NW, font=('Ivy 10'), bg=b4, fg=b11)
+    lab_name_libre.grid(row=2, column=0, padx=5, pady=10, sticky=NSEW)
+
+    ent_name_libre = Entry(frame_direita, width=25, justify="left", relief="solid")
+    ent_name_libre.grid(row=2, column=1, padx=5, pady=10, sticky=NSEW)
+
+    
+#def para menu  
+ 
+
 def control(i):
     if i == 'novo_usuario':
         for widget in frame_direita.winfo_children():
             widget.destroy()
         new_user()
+
+    if i == 'new_libre':
+        for widget in frame_direita.winfo_children():
+            widget.destroy()
+        new_libre()
 
 
 
@@ -71,14 +156,14 @@ user_img = ImageTk.PhotoImage(user_img)
 add_usuario = Button(frame_left, command=lambda:control('novo_usuario'), image=user_img, compound=LEFT, anchor=NW, text="Novo Usuário", bg=b11, fg=b2, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
 add_usuario.grid(row=0, column=0, sticky=NSEW, padx=5, pady=6
                )
-#add livro
+#new libre
 
 
 img_libre = Image.open('livro/icons/add.png')
 img_libre = img_libre.resize((18,18))
 img_libre = ImageTk.PhotoImage(img_libre)
 
-add_libre = Button(frame_left, image=img_libre, compound=LEFT, anchor=NW, text="Novo Livro", bg=b11, fg=b2, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+add_libre = Button(frame_left,command=lambda:control('new_libre'), image=img_libre, compound=LEFT, anchor=NW, text="Novo Livro", bg=b11, fg=b2, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
 add_libre.grid(row=1, column=0, sticky=NSEW, padx=5, pady=6  )
 
 
