@@ -1,8 +1,13 @@
 from tkinter import *
+from tkinter import Tk
 from PIL import Image, ImageTk
 from view import *       
 from tkinter import messagebox
 from tkinter import ttk
+from view_users import *
+from view_books import *
+from tkinter.messagebox import showerror, showwarning
+
 
 b1 = "#00000" 
 b11 = "#1C1C1C"
@@ -10,6 +15,7 @@ b2 = "#A9A9A9"
 b3 = "#C0C0C0"
 b4 = "#DCDCDC" #label names
 m1 = "#FF8C00" #menu
+line_show_data = "#191970"
 
 
 janela = Tk()
@@ -32,12 +38,6 @@ frame_right = Frame(janela, width=550, height=265, bg=b3, relief="raised")
 frame_right.grid(row = 1, column= 1, columnspan=2, sticky=NSEW)
 
 
-
-#logos
-
-#abrindo a img 
-
-#app_img = Image.open('sistema_livros/icons/livro.png')
 app_img = Image.open('../sistema_livros/icons/livro.png')
 app_img = app_img.resize((40, 40))
 app_img = ImageTk.PhotoImage(app_img)
@@ -191,18 +191,23 @@ def new_book():
 
 def show_books_home():
     global img_salvar
-    def add():
-        pass
-       
-    
-      
+    main_books()
+
+
 def show_users_home():
     global tree
-    pass
-   
+    main_users()
+    print("chamou show users")
 
-#def menu  control  
- 
+def realizar_emprestimo():
+    pass 
+
+def date_devolution():
+    pass
+
+def show_loan_database():
+    pass
+
 def control(i):
     if i == 'new_user':
         for widget in frame_right.winfo_children():
@@ -229,10 +234,23 @@ def control(i):
         show_users_home()
         print('chamou exibir users ')
 
-        
+    if i == 'realizar_emprestimo':
+        for widget in frame_right.winfo_children():
+            widget.destroy()
+        realizar_emprestimo()
+        print("chamou realizar emp")
+
+    if i == 'date_devolution':
+        for  widget in frame_right.winfo_children():       
+            widget.destroy()
+        date_devolution()
+        print("chamo dev")
+
+    if i == 'show_loan_database': 
+        for widger in frame_right.winfo_children():
+            widget.destroy()
+        show_loan_database()
    
-
-
 
 
 #menu interface lateral--------------
@@ -244,8 +262,6 @@ add_usuario = Button(frame_left, command=lambda:control('new_user'), image=user_
 add_usuario.grid(row=0, column=0, sticky=NSEW, padx=5, pady=6
                )
 #new book
-
-
 img_book = Image.open('../sistema_livros/icons/add.png')
 img_book = img_book.resize((18,18))
 img_book = ImageTk.PhotoImage(img_book)
@@ -255,8 +271,6 @@ add_book.grid(row=1, column=0, sticky=NSEW, padx=5, pady=6  )
 
 
 #show books
-
-
 img_show_books = Image.open('../sistema_livros/icons/livro.png')
 img_show_books = img_show_books.resize((18,18))
 img_show_books = ImageTk.PhotoImage(img_show_books)
@@ -265,7 +279,6 @@ show_books = Button(frame_left, command=lambda:control('show_books_home'), image
 show_books.grid(row=2, column=0, sticky=NSEW, padx=5, pady=6 )
 
 #show users
-
 img_show_users = Image.open('../sistema_livros/icons/user.png')
 img_show_users = img_show_users.resize((18,18))
 img_show_users = ImageTk.PhotoImage(img_show_users)
@@ -278,7 +291,7 @@ img_emp_users = Image.open('../sistema_livros/icons/add.png')
 img_emp_users = img_emp_users.resize((18,18))
 img_emp_users = ImageTk.PhotoImage(img_emp_users)
 
-add_empp = Button(frame_left, image=img_emp_users, compound=LEFT, anchor=NW, text="Realizar Emprestimo", bg=b11, fg=b2, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE  )
+add_empp = Button(frame_left, command=lambda:control("realizar_emprestimo"),image=img_emp_users, compound=LEFT, anchor=NW, text="Realizar Emprestimo", bg=b11, fg=b2, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE  )
 add_empp .grid(row=4, column=0, sticky=NSEW, padx=5, pady=6 )
 
 #devolucao emp
@@ -287,7 +300,7 @@ img_dev_emp = img_dev_emp.resize((16,16 ))
 img_dev_emp = ImageTk.PhotoImage(img_dev_emp)
 
 #emprestados 
-add_devolution  =  Button(frame_left, image=img_dev_emp, compound=LEFT, anchor=NW, text="Adicionar Data Devolução", bg=b11, fg=b2, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+add_devolution  =  Button(frame_left, command=lambda:control("date_devolution"),image=img_dev_emp, compound=LEFT, anchor=NW, text="Adicionar Data Devolução", bg=b11, fg=b2, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
 add_devolution.grid(row=5 ,column=0, padx=5, pady=6)
 
 
@@ -295,8 +308,7 @@ img_show_emp = Image.open('../sistema_livros/icons/livro.png')
 img_show_emp = img_show_emp.resize((18,18 ))
 img_show_emp = ImageTk.PhotoImage(img_show_emp)
 
-
-show_books_emp  =  Button(frame_left, image=img_show_emp, compound=LEFT, anchor=NW, text="Exibir Livros emprestados", bg=b11, fg=b2, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+show_books_emp  =  Button(frame_left, command=lambda:control("show_loan_database"), image=img_show_emp, compound=LEFT, anchor=NW, text="Exibir Livros emprestados", bg=b11, fg=b2, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
 show_books_emp.grid(row=6 ,column=0, padx=5, pady=6)
 
 janela.mainloop()
